@@ -1,5 +1,7 @@
 package com.skool.models;
 
+import org.springframework.stereotype.Service;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +25,7 @@ public class Result {
 
     private int cgpa;
 
-    private HashMap<Long, Integer> scores = new HashMap();
+    private HashMap<Course, Integer> scores = new HashMap();
 
     private long studentId;
 

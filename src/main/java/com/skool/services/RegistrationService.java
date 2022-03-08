@@ -19,7 +19,8 @@ public class RegistrationService {
     }
 
     public boolean checkEligibility(Long courseId){
-        //Todo : do sokme shit to check couse eligibity
+
+        //Todo : do some shit to check course eligibility
         return true;
     }
 }

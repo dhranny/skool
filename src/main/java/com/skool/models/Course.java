@@ -19,4 +19,7 @@ public class Course {
     private String courseCode;
     private List<Lecturer> lecturersInCharge;
     private List<Student> studentsEnrolled;
+    private List<Course> prerequisites;
+
+
 }
