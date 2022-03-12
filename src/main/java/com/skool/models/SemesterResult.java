@@ -1,6 +1,6 @@
 package com.skool.models;
 
-import org.springframework.stereotype.Service;
+import com.skool.util.ResultList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import java.util.HashMap;
 
 @Entity
-public class Result {
+public class SemesterResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -17,21 +17,29 @@ public class Result {
 
     private int level;
 
+    public int getLevel(){
+        return level;
+    }
+
     private int passScore;
 
     private int semester;
+
+    public int getSemester(){
+        return semester;
+    }
 
     private int gpa;
 
     private int cgpa;
 
-    private HashMap<Course, Integer> scores = new HashMap();
+    private ResultList scores = new ResultList();
 
     private long studentId;
 
     public boolean ifPass(long courseId){
-        int score = scores.get(courseId);
-        if (score >= passScore)
+        CourseResult cResult = scores.getByCourse(courseId);
+        if (cResult.isPass())
             return true;
         return false;
     }

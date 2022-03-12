@@ -16,10 +16,20 @@ public class RegistrationController {
     @Autowired
     RegistrationService regServ;
 
+    /**
+     * @param coursesId
+     * @return ResponseEntity<>
+     *     Endpoint for course registration it
+     *     receives a list of course ids check the
+     *     eligibility of student to register and
+     *     then register the student.
+     */
     @PostMapping
     public ResponseEntity postRegistration(List<Long> coursesId){
-        if(regServ.checkMassEligibility(coursesId))
+        if(regServ.checkMassEligibility(coursesId)) {
+            coursesId.forEach(courseId -> regServ.register(courseId));//using a for each to loop through the courseid list
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
