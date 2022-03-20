@@ -10,8 +10,7 @@ import java.util.List;
 public class Student extends User{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id;
+    String id;
 
     private String matricNo;
     private String level;
