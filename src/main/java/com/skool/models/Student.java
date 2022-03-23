@@ -1,9 +1,6 @@
 package com.skool.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -15,7 +12,16 @@ public class Student extends User{
     private String matricNo;
     private String level;
     private String dept;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "Student_Courses",
+            joinColumns = { @JoinColumn(name = "matric_no"  ) },
+            inverseJoinColumns = { @JoinColumn(name = "course_id") }
+    )
     private List<Course> courses;
+
+    @OneToMany
     private List<SemesterResult> results;
 
     public SemesterResult getLastResult(){

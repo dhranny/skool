@@ -16,10 +16,8 @@ public class CourseService {
     CourseRepo couRepo;
 
     public Course getCourse(long courseId){
-        Optional<Course> optionalCourse = couRepo.getById(courseId);
-        if(optionalCourse.isEmpty())
-            throw new IllegalArgumentException("There is no student as this");
-        return optionalCourse.get();
+        return couRepo.getById(courseId);
+
     }
 
     public void updateScores(long courseId, List<CourseResult> results){

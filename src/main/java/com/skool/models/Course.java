@@ -3,10 +3,8 @@ package com.skool.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,19 +12,22 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long courseId;
     private String courseDescription;
     private String courseTitle;
     private String courseCode;
 
     @JsonManagedReference
-    private List<Lecturer> lecturersInCharge;
+    @ManyToMany(mappedBy = "employeeId")
+    private List<Lecturer> lecturersInCharge = new ArrayList<>();
 
     @JsonManagedReference
-    private List<Student> studentsEnrolled;
+    @ManyToMany(mappedBy = "matricNo")
+    private List<Student> studentsEnrolled = new ArrayList<>();
 
     @JsonManagedReference
-    private List<Course> prerequisites;
+    @OneToMany//(mappedBy = "courseId")
+    private List<Course> prerequisites = new ArrayList<>();
 
     public void addStudent(Student student){
         if (student == null) {

@@ -20,10 +20,7 @@ public class CourseController {
 
     @Autowired
     KafkaService kafserv;
-
-    @Autowired
-    Principal principal;
-
+    
     @GetMapping("/{courseid}")
     public ResponseEntity getCourseStudents(@PathVariable long courseId){
         List students = couServ.getStudents(courseId);

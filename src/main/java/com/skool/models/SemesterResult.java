@@ -2,10 +2,7 @@ package com.skool.models;
 
 import com.skool.util.ResultList;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashMap;
 
 @Entity
@@ -35,7 +32,8 @@ public class SemesterResult {
 
     private ResultList scores = new ResultList();
 
-    private long studentId;
+    @ManyToOne
+    private Student student;
 
     public boolean ifPass(long courseId){
         CourseResult cResult = scores.getByCourse(courseId);
