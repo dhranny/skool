@@ -12,7 +12,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("course")
+@RequestMapping("/course")
 public class CourseController {
 
     @Autowired
@@ -20,21 +20,26 @@ public class CourseController {
 
     @Autowired
     KafkaService kafserv;
-    
-    @GetMapping("/{courseid}")
-    public ResponseEntity getCourseStudents(@PathVariable long courseId){
+
+    @PostMapping
+    public ResponseEntity newCourse(){
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{courseId}")
+    public ResponseEntity getCourseStudents(@PathVariable int courseId){
         List students = couServ.getStudents(courseId);
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
     @PatchMapping("/{courseId}/score/")
-    public ResponseEntity updateScore(@PathVariable long courseId, @RequestBody List<CourseResult> results){
+    public ResponseEntity updateScore(@PathVariable int courseId, @RequestBody List<CourseResult> results){
         couServ.updateScores(courseId, results);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/{couseId}")
-    public ResponseEntity sendMessage(@PathVariable Long courseId,@RequestBody String message){
+    public ResponseEntity sendMessage(@PathVariable Integer courseId, @RequestBody String message){
         //todo : wrap messages in an object along with date and student id
         kafserv.send(courseId.toString(), message);
         return ResponseEntity.accepted().build();

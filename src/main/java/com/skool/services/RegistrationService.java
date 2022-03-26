@@ -15,10 +15,6 @@ import java.util.List;
 @Service
 public class RegistrationService {
 
-    RegistrationService(@SessionAttribute Student student){
-        lastResult = student.getLastResult();
-        this.student = student;
-    }
 
     @Autowired
     private CourseRepo courseRepo;
