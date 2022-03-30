@@ -1,6 +1,7 @@
 package com.skool.services;
 
 import com.skool.data.StudentRepo;
+import com.skool.data.UserRepo;
 import com.skool.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

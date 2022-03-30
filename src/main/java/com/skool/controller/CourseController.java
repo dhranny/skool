@@ -1,11 +1,13 @@
 package com.skool.controller;
 
+import com.skool.models.Course;
 import com.skool.models.CourseResult;
 import com.skool.services.CourseService;
 import com.skool.services.KafkaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -22,7 +24,8 @@ public class CourseController {
     KafkaService kafserv;
 
     @PostMapping
-    public ResponseEntity newCourse(){
+    public ResponseEntity newCourse(@RequestBody @NonNull Course course){
+        couServ.addCourse(course);
         return ResponseEntity.ok().build();
     }
 

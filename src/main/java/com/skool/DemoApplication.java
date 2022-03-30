@@ -13,7 +13,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(basePackages = {"com.skool.controller",
 								"com.skool.data",
 								"com.skool.models",
-								"com.skool.services"})
+								"com.skool.services",
+								"com.skool.security"})
 @EnableSwagger2
 public class DemoApplication {
 

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Student extends User{
+public class Student extends Property{
 
     @Id
     String id;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Lecturer {
+public class Lecturer extends Property{
 
     @Id
     String id;
