@@ -11,15 +11,13 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
+@MappedSuperclass
 public class User implements UserDetails {
 
-    private enum Role{
+    public enum Role{
         STUDENT, LECTURER, ADMIN
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
     private String firstName;
     private String lastName;
     private byte[] pic;
@@ -35,10 +33,6 @@ public class User implements UserDetails {
         else
             throw new IllegalArgumentException();
         this.property = property;
-    }
-
-    public Property getProperty(){
-        return property;
     }
 
     @Override

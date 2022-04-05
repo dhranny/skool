@@ -1,4 +1,5 @@
 package com.skool.controller;
+import com.skool.models.Admin;
 import com.skool.models.LoginModel;
 import com.skool.models.Token;
 import com.skool.models.User;
@@ -51,5 +52,12 @@ public class RegistrationController {
         String token = jwtUtil.makeToken(user);
         return ResponseEntity.ok(new Token(token));
     }
+
+    @PostMapping("admin/register")
+    public ResponseEntity adminReg(@RequestBody Admin admin){
+
+    }
+
+
 
 }
