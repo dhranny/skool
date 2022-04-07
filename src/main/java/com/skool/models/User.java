@@ -10,30 +10,17 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@Entity
 @MappedSuperclass
 public class User implements UserDetails {
 
     public enum Role{
         STUDENT, LECTURER, ADMIN
     }
-
     private String firstName;
     private String lastName;
     private byte[] pic;
     private Role role;
     private String password;
-
-    @OneToOne
-    private Student property;
-
-    public void setProperty(Student property){
-        if(property instanceof Student)
-            role = Role.STUDENT;
-        else
-            throw new IllegalArgumentException();
-        this.property = property;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

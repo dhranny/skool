@@ -45,11 +45,11 @@ public class SkoolSecurity extends WebSecurityConfigurerAdapter{
 		
 		httpSec
 			.cors()
-		.and()
+				.disable()
 			.csrf()
 				.disable()
 			.authorizeRequests()
-				.antMatchers("/login")
+				.antMatchers("/login","/admin/**")
 					.permitAll()
 				.anyRequest()
 					.authenticated()

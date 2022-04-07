@@ -5,29 +5,31 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long courseId;
+    long id;
     private String courseDescription;
     private String courseTitle;
     private String courseCode;
 
     @JsonManagedReference
-    @ManyToMany(mappedBy = "employeeId")
+    @ManyToMany(mappedBy = "coursesHandling")
     private List<Lecturer> lecturersInCharge = new ArrayList<>();
 
     @JsonManagedReference
-    @ManyToMany(mappedBy = "matricNo")
-    private List<Student> studentsEnrolled = new ArrayList<>();
+    @ManyToMany(mappedBy = "courses")
+    public List<Student> studentsEnrolled = new ArrayList<>();
 
     @JsonManagedReference
     @OneToMany//(mappedBy = "courseId")
-    private List<Course> prerequisites = new ArrayList<>();
+    private Set<Course> prerequisites = new HashSet<>();
 
     public void addStudent(Student student){
         if (student == null) {

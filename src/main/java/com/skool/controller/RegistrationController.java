@@ -3,12 +3,17 @@ import com.skool.models.Admin;
 import com.skool.models.LoginModel;
 import com.skool.models.Token;
 import com.skool.models.User;
+import com.skool.services.AdminService;
 import com.skool.services.JwtUtil;
 import com.skool.services.RegistrationService;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +31,11 @@ public class RegistrationController {
     @Autowired
     JwtUtil jwtUtil;
 
+    @Autowired
+    AdminService adminServ;
+
+    @Autowired
+    AuthenticationManager authManager;
     @Autowired
     UserDetailsService userDetailsServ;
 
@@ -55,9 +65,18 @@ public class RegistrationController {
 
     @PostMapping("admin/register")
     public ResponseEntity adminReg(@RequestBody Admin admin){
-
+        adminServ.saveAdmin(admin);
+        return ResponseEntity.ok().build();
     }
 
-
-
+    @PostMapping(path = "admin/login", consumes = "application/json")
+    public ResponseEntity adminLogin(@RequestBody LoginModel login){
+        System.out.println("came here");
+        Admin admin = adminServ.findAdmin(login.getUsername());
+       // Authentication authentication = authManager.authenticate(new
+         //       UsernamePasswordAuthenticationToken(admin.getUsername(), admin.getPassword()));
+        //SecurityContextHolder.getContext().setAuthentication(authentication);
+        String stringToken = jwtUtil.makeToken(admin);
+        return ResponseEntity.ok(new Token(stringToken));
+    }
 }

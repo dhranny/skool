@@ -6,6 +6,7 @@ import java.util.List;
 @Entity
 public class Student extends User{
 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
     String id;
 
@@ -16,10 +17,10 @@ public class Student extends User{
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "Student_Courses",
-            joinColumns = { @JoinColumn(name = "matric_no"  ) },
-            inverseJoinColumns = { @JoinColumn(name = "course_id") }
+            joinColumns = { @JoinColumn(name = "student_id", referencedColumnName="id") },
+            inverseJoinColumns = { @JoinColumn(name = "course_id", referencedColumnName="id") }
     )
-    private List<Course> courses;
+    public List<Course> courses;
 
     @OneToMany
     private List<SemesterResult> results;
