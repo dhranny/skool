@@ -7,10 +7,7 @@ import java.util.List;
 @Entity
 public class Lecturer extends User{
 
-    @Id
-    String id;
     String employeeId;
-
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(

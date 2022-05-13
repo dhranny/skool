@@ -8,12 +8,4 @@ import javax.persistence.Id;
 @Entity
 public class Admin extends User{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    long id;
-
-    String username;
-
-
-
 }
