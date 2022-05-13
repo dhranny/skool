@@ -6,10 +6,6 @@ import java.util.List;
 @Entity
 public class Student extends User{
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Id
-    String id;
-
     private String matricNo;
     private String level;
     private String dept;
@@ -41,5 +37,13 @@ public class Student extends User{
             throw new NullPointerException("Course cannot be null");
         }
         courses.add(course);
+    }
+
+    @Override
+    public String getUsername() {
+        if(super.getUsername() == null)
+            return matricNo;
+        return super.getUsername();
+
     }
 }

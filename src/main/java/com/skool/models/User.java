@@ -10,17 +10,25 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@MappedSuperclass
-public class User implements UserDetails {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class User implements UserDetails {
 
     public enum Role{
         STUDENT, LECTURER, ADMIN
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    public long id;
     private String firstName;
     private String lastName;
     private byte[] pic;
     private Role role;
     private String password;
+
+    @Access(AccessType.PROPERTY)
+    private String username;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -35,8 +43,8 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
-        return lastName;
+    public String getUsername(){
+        return username;
     }
 
     @Override

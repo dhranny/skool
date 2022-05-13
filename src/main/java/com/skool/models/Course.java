@@ -11,7 +11,6 @@ import java.util.Set;
 
 @Entity
 public class Course {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
@@ -30,7 +29,6 @@ public class Course {
     @JsonManagedReference
     @OneToMany//(mappedBy = "courseId")
     private Set<Course> prerequisites = new HashSet<>();
-
     public void addStudent(Student student){
         if (student == null) {
             throw new NullPointerException("Student cannot be null");
@@ -39,9 +37,7 @@ public class Course {
         studentsEnrolled.add(student);
         student.addCourse(this);
     }
-
     public List<Student> getStudents(){
         return studentsEnrolled;
     }
-
 }
