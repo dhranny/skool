@@ -2,6 +2,7 @@ package com.skool;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -15,6 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 								"com.skool.models",
 								"com.skool.services",
 								"com.skool.security"})
+@EntityScan("com.skool.models")
 @EnableSwagger2
 public class DemoApplication {
 

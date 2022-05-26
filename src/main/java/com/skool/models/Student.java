@@ -3,7 +3,7 @@ package com.skool.models;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "Student")
 public class Student extends User{
 
     private String matricNo;
