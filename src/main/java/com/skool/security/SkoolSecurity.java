@@ -49,7 +49,7 @@ public class SkoolSecurity extends WebSecurityConfigurerAdapter{
 			.csrf()
 				.disable()
 			.authorizeRequests()
-				.antMatchers("/login","/admin/**")
+				.antMatchers("/login","/admin/**","/createtenant")
 					.permitAll()
 				.anyRequest()
 					.authenticated()

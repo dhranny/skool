@@ -21,6 +21,10 @@ public class TenantDataSource implements Serializable {
     @Autowired
     private DataSourceConfigRepository configRepo;
 
+    private DataSourceConfig dataSourceConfig(){
+        return new DataSourceConfig();
+    }
+
     public DataSource getDataSource(String name) {
         if (dataSources.get(name) != null) {
             return dataSources.get(name);
@@ -55,6 +59,23 @@ public class TenantDataSource implements Serializable {
             return ds;
         }
         return null;
+    }
+
+    public DataSourceConfig createNewDataSourceConfig(String name, String password){
+        DataSourceConfig dataConfig = new DataSourceConfig();
+        dataConfig.setName(name);
+        dataConfig.setPassword(password);
+        dataConfig.setDriverClassName("org.h2.Driver");
+        dataConfig.setUrl("jdbc:h2:mem:" + name);
+
+        configRepo.save(dataConfig);
+
+        return dataConfig;
+    }
+
+    public DataSource createNewDataSource(String name, String password){
+        DataSourceConfig dataSourceConfig = createNewDataSourceConfig(name, password);
+        return createDataSource(name);
     }
 
 }

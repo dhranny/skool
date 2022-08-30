@@ -1,11 +1,15 @@
 package com.skool.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.skool.util.ResultList;
 
 import javax.persistence.*;
 import java.util.HashMap;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SemesterResult {
 
     @Id
