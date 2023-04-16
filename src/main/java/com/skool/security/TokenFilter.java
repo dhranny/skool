@@ -50,6 +50,9 @@ public class TokenFilter extends OncePerRequestFilter{
 		}
 		chain.doFilter(request, response);
 	}
+	protected void finalize(){
+
+	}
 	
 }
 

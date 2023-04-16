@@ -36,6 +36,8 @@ public class HibernateConfig {
 
         Map<String, Object> jpaPropertiesMap = new HashMap<>(jpaProperties.getProperties());
         jpaPropertiesMap.put(Environment.MULTI_TENANT, MultiTenancyStrategy.DATABASE);
+        jpaPropertiesMap.put(Environment.HBM2DDL_AUTO, "create");
+        jpaPropertiesMap.put(Environment.DIALECT, "org.hibernate.dialect.H2Dialect");
         jpaPropertiesMap.put(Environment.MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProviderImpl);
         jpaPropertiesMap.put(Environment.MULTI_TENANT_IDENTIFIER_RESOLVER, currentTenantIdentifierResolverImpl);
         jpaPropertiesMap.put(Environment.FORMAT_SQL, true);
