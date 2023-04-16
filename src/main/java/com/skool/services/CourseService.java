@@ -3,7 +3,6 @@ package com.skool.services;
 import com.skool.data.CourseRepo;
 import com.skool.models.Course;
 import com.skool.models.CourseResult;
-import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +31,7 @@ public class CourseService {
         return course.getStudents();
     }
 
-    public void addCourse(@NotNull Course course){
+    public void addCourse( Course course){
         couRepo.save(course);
     }
 }

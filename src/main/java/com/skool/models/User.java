@@ -18,7 +18,7 @@ public abstract class User implements UserDetails {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     private String firstName;
     private String lastName;

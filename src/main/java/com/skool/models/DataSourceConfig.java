@@ -13,9 +13,24 @@ import java.io.Serializable;
 public class DataSourceConfig implements Serializable {
     private static final long serialVersionUID = 5104181924076372196L;
 
+    public void setInitialize(boolean initialize) {
+        this.initialize = initialize;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isInitialize() {
+        return initialize;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
     private String name;
     private String url;
     private String username;

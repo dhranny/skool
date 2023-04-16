@@ -4,23 +4,23 @@ import org.hibernate.engine.jdbc.connections.spi.AbstractDataSourceBasedMultiTen
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
 public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDataSourceBasedMultiTenantConnectionProviderImpl {
 
-    private static final String DEFAULT_TENANT_ID = "1";
+    private static final String DEFAULT_TENANT_ID = "DEFAULT_TENANT_ID";
     @Autowired
     private DataSource defaultDS;
 
     @Autowired
     private ApplicationContext context;
 
-    private Map<String, DataSource> map = new HashMap<>();
+    public Map<String, DataSource> map = new HashMap<>();
 
     boolean init = false;
 
@@ -28,7 +28,6 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
     public void load() {
         map.put(DEFAULT_TENANT_ID, defaultDS);
     }
-
     @Override
     protected DataSource selectAnyDataSource() {
         return map.get(DEFAULT_TENANT_ID);
@@ -41,6 +40,14 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
             TenantDataSource tenantDataSource = context.getBean(TenantDataSource.class);
             map.putAll(tenantDataSource.getAll());
         }
-        return map.get(tenantIdentifier) != null ? map.get(tenantIdentifier) : map.get(DEFAULT_TENANT_ID);
+        DataSource dataSource = map.get(tenantIdentifier) != null ? map.get(tenantIdentifier) : map.get(DEFAULT_TENANT_ID);
+        try {
+            dataSource.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(map.get(tenantIdentifier) == null)
+            System.out.println(tenantIdentifier);
+        return dataSource;
     }
 }

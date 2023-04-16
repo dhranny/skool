@@ -6,7 +6,7 @@ import com.skool.models.User;
 import com.skool.services.AdminService;
 import com.skool.services.JwtUtil;
 import com.skool.services.RegistrationService;
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
