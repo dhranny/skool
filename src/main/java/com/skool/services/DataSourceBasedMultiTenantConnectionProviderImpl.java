@@ -1,7 +1,9 @@
 package com.skool.services;
 
+import com.skool.models.DataSourceConfig;
 import org.hibernate.engine.jdbc.connections.spi.AbstractDataSourceBasedMultiTenantConnectionProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
